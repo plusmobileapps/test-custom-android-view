@@ -41,16 +41,16 @@ class MyCustomViewTest {
     fun `toggle lock - should be locked`() {
         setUp(isLocked = false)
         myCustomView.toggleLock()
-        assertEquals(expectedLockText, lockDescription.text)
-        assertEquals(R.drawable.ic_lock_24px, shadowOf(lockButton.drawable).createdFromResId)
+        lockDescription.assertText(expectedLockText)
+        lockButton.assertDrawableResource(R.drawable.ic_lock_24px)
     }
 
     @Test
     fun `toggle lock - should be unlocked`() {
         setUp(isLocked = true)
         myCustomView.toggleLock()
-        assertEquals(expectedUnlockText, lockDescription.text)
-        assertEquals(R.drawable.ic_lock_open_24px, shadowOf(lockButton.drawable).createdFromResId)
+        lockDescription.assertText(expectedUnlockText)
+        lockButton.assertDrawableResource(R.drawable.ic_lock_open_24px)
     }
 
     @Test
