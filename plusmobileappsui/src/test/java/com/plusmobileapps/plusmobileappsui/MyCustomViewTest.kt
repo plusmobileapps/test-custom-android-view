@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Build
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -17,6 +18,7 @@ import org.robolectric.annotation.Config
 class MyCustomViewTest {
 
     private lateinit var myCustomView: MyCustomView
+    private lateinit var rootView: ConstraintLayout
     private lateinit var lockButton: ImageButton
     private lateinit var lockDescription: TextView
 
@@ -33,6 +35,7 @@ class MyCustomViewTest {
             build()
         }
         myCustomView = MyCustomView(activity, attributeSet)
+        rootView = myCustomView.findViewById(R.id.custom_view_root)
         lockButton = myCustomView.findViewById(R.id.lock_button)
         lockDescription = myCustomView.findViewById(R.id.lock_status_description)
     }
@@ -55,11 +58,19 @@ class MyCustomViewTest {
 
     @Test
     fun `root shouldn't have ripple when locked and only unlock with image button`() {
-        TODO()
-    }
+        setUp(isLocked = true)
 
-    @Test
-    fun `attributes set text and to locked state`() {
-        TODO()
+        myCustomView.performClick()
+        lockButton.assertDrawableResource(R.drawable.ic_lock_24px)
+        rootView.assertBackground(android.R.color.white)
+
+        lockButton.performClick()
+        rootView.assertBackground(R.drawable.my_custom_ripple)
+        lockButton.assertDrawableResource(R.drawable.ic_lock_open_24px)
+
+        myCustomView.performClick()
+        rootView.assertBackground(android.R.color.white)
+        lockButton.assertDrawableResource(R.drawable.ic_lock_24px)
     }
+    
 }
