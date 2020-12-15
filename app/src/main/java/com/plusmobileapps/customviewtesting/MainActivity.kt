@@ -3,12 +3,12 @@ package com.plusmobileapps.customviewtesting
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
-import com.plusmobileapps.plusmobileappsui.Foo
+import com.plusmobileapps.plusmobileappsui.MyCustomView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        findViewById<TextView>(R.id.hello_world).text = Foo().greeting
+        findViewById<MyCustomView>(R.id.my_custom_view).toggleLock()
     }
 }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MyCustomView">
+        <attr name="isLocked" format="boolean" />
+        <attr name="unlockLabel" format="string"/>
+        <attr name="lockLabel" format="string"/>
+    </declare-styleable>
+</resources>

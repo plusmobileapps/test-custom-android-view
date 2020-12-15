@@ -6,14 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/hello_world"
-        android:layout_width="wrap_content"
+    <com.plusmobileapps.plusmobileappsui.MyCustomView
+        android:id="@+id/my_custom_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:isLocked="true"
+        app:unlockLabel="@string/unlocked_card_description"
+        app:lockLabel="@string/lock_carded_description"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
