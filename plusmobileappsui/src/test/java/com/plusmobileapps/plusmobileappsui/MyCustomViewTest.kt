@@ -72,5 +72,5 @@ class MyCustomViewTest {
         rootView.assertBackground(android.R.color.white)
         lockButton.assertDrawableResource(R.drawable.ic_lock_24px)
     }
-    
+
 }
