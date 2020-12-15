@@ -1,2 +1,3 @@
+include ':plusmobileappsui'
 include ':app'
 rootProject.name = "Custom View Testing"
