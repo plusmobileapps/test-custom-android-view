@@ -6,9 +6,11 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 
 class MyCustomView : CardView {
 
+    private lateinit var rootView: ConstraintLayout
     private lateinit var lockButton: ImageButton
     private lateinit var lockDescription: TextView
 
@@ -29,6 +31,7 @@ class MyCustomView : CardView {
 
     private fun setup(context: Context, attrs: AttributeSet?) {
         View.inflate(context, R.layout.my_custom_view_layout, this)
+        rootView = findViewById(R.id.custom_view_root)
         lockButton = findViewById(R.id.lock_button)
         lockDescription = findViewById(R.id.lock_status_description)
         val attributes = context.theme.obtainStyledAttributes(attrs, R.styleable.MyCustomView, 0, 0)
@@ -40,7 +43,7 @@ class MyCustomView : CardView {
             unlockedDescription = it
         }
         updateState()
-        setOnClickListener { toggleLock() }
+        setOnClickListener { if(!isLocked) toggleLock() }
         lockButton.setOnClickListener { toggleLock() }
     }
 
@@ -51,9 +54,11 @@ class MyCustomView : CardView {
 
     private fun updateState() {
         if (isLocked) {
+            rootView.setBackgroundResource(android.R.color.white)
             lockButton.setImageResource(R.drawable.ic_lock_24px)
             lockDescription.text = lockedDescription
         } else {
+            rootView.setBackgroundResource(R.drawable.my_custom_ripple)
             lockButton.setImageResource(R.drawable.ic_lock_open_24px)
             lockDescription.text = unlockedDescription
         }
