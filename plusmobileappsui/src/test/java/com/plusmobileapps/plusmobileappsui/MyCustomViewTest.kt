@@ -5,6 +5,12 @@ import android.os.Build
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import io.mockk.MockKAnnotations
+import io.mockk.every
+import io.mockk.impl.annotations.MockK
+import io.mockk.impl.annotations.RelaxedMockK
+import io.mockk.mockk
+import io.mockk.verify
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -17,10 +23,13 @@ import org.robolectric.annotation.Config
 @Config(sdk = [Build.VERSION_CODES.O_MR1])
 class MyCustomViewTest {
 
+
     private lateinit var myCustomView: MyCustomView
     private lateinit var rootView: ConstraintLayout
     private lateinit var lockButton: ImageButton
     private lateinit var lockDescription: TextView
+
+    private val lockedListener: (Boolean) -> Unit = mockk()
 
     private val expectedUnlockText = "some unlock text"
     private val expectedLockText = "some locked text"
@@ -34,10 +43,12 @@ class MyCustomViewTest {
             addAttribute(R.attr.isLocked, isLocked.toString())
             build()
         }
+        every { lockedListener(any()) } returns Unit
         myCustomView = MyCustomView(activity, attributeSet)
         rootView = myCustomView.findViewById(R.id.custom_view_root)
         lockButton = myCustomView.findViewById(R.id.lock_button)
         lockDescription = myCustomView.findViewById(R.id.lock_status_description)
+        myCustomView.onLockListener = lockedListener
     }
 
     @Test
@@ -63,14 +74,43 @@ class MyCustomViewTest {
         myCustomView.performClick()
         lockButton.assertDrawableResource(R.drawable.ic_lock_24px)
         rootView.assertBackground(android.R.color.white)
+        verify(exactly = 0) { lockedListener(any()) }
 
         lockButton.performClick()
         rootView.assertBackground(R.drawable.my_custom_ripple)
         lockButton.assertDrawableResource(R.drawable.ic_lock_open_24px)
+        verify { lockedListener(false) }
 
         myCustomView.performClick()
         rootView.assertBackground(android.R.color.white)
         lockButton.assertDrawableResource(R.drawable.ic_lock_24px)
+        verify { lockedListener(true) }
+    }
+
+    @Test
+    fun `lock listener invoked - initial false then toggled to true`() {
+        setUp(isLocked = false)
+
+        myCustomView.toggleLock()
+
+        verify { lockedListener(true) }
+    }
+
+    @Test
+    fun `lock listener invoked - initial true then toggled to false`() {
+        setUp(isLocked = true)
+
+        myCustomView.toggleLock()
+
+        verify { lockedListener(false) }
+    }
+
+    @Test
+    fun `content description`() {
+        setUp(isLocked = true)
+        assertEquals(expectedLockText, myCustomView.contentDescription)
+        myCustomView.toggleLock()
+        assertEquals(expectedUnlockText, myCustomView.contentDescription)
     }
 
 }

@@ -42,6 +42,7 @@ class MyCustomView : CardView {
         attributes.getString(R.styleable.MyCustomView_unlockLabel)?.let {
             unlockedDescription = it
         }
+        attributes.recycle()
         updateState()
         setOnClickListener { if(!isLocked) toggleLock() }
         lockButton.setOnClickListener { toggleLock() }
@@ -57,10 +58,12 @@ class MyCustomView : CardView {
             rootView.setBackgroundResource(android.R.color.white)
             lockButton.setImageResource(R.drawable.ic_lock_24px)
             lockDescription.text = lockedDescription
+            contentDescription = lockedDescription
         } else {
             rootView.setBackgroundResource(R.drawable.my_custom_ripple)
             lockButton.setImageResource(R.drawable.ic_lock_open_24px)
             lockDescription.text = unlockedDescription
+            contentDescription = unlockedDescription
         }
         onLockListener(isLocked)
     }

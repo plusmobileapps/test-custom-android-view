@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="lock_carded_description">The material card is currently locked. Click to unlock</string>
-    <string name="unlocked_card_description">The card is unlocked. Click to lock</string>
+    <string name="lock_carded_description">The material card is currently locked. Must click lock button to unlock.</string>
+    <string name="unlocked_card_description">The card is unlocked. This card can be clicked to lock.</string>
 </resources>
