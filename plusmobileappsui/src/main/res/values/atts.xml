@@ -4,5 +4,7 @@
         <attr name="isLocked" format="boolean" />
         <attr name="unlockLabel" format="string"/>
         <attr name="lockLabel" format="string"/>
+        <attr name="lockedIcon" format="reference"/>
+        <attr name="unlockedIcon" format="reference"/>
     </declare-styleable>
 </resources>

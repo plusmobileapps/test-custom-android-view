@@ -13,6 +13,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         app:isLocked="true"
+        app:lockedIcon="@drawable/ic_lock_24px"
+        app:unlockedIcon="@drawable/ic_lock_open_24px"
         app:unlockLabel="@string/unlocked_card_description"
         app:lockLabel="@string/lock_carded_description"
         app:layout_constraintBottom_toBottomOf="parent"

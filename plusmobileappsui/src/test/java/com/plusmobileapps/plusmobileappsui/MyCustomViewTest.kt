@@ -36,6 +36,8 @@ class MyCustomViewTest {
             addAttribute(R.attr.unlockLabel, expectedUnlockText)
             addAttribute(R.attr.lockLabel, expectedLockText)
             addAttribute(R.attr.isLocked, isLocked.toString())
+            addAttribute(R.attr.lockedIcon, "@drawable/ic_lock_24px")
+            addAttribute(R.attr.unlockedIcon, "@drawable/ic_lock_open_24px")
         }
         every { lockedListener(any()) } returns Unit
         myCustomView = MyCustomView(activity, attributeSet)
