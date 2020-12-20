@@ -1,6 +1,6 @@
 # Testing Custom Android Views 
 
-This is a sample app that tests a custom Android view component with [Robolectric](http://robolectric.org). 
+This is a sample app that tests a custom Android view component with [Robolectric](http://robolectric.org). For full a full explanation, please reference this [blog post](https://plusmobileapps.com/2020/12/14/android-custom-view-testing.html).
 
 
 ![](docs/custom_view.gif)
