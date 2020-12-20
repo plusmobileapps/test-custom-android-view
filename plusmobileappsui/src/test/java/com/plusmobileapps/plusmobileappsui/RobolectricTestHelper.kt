@@ -3,6 +3,7 @@ package com.plusmobileapps.plusmobileappsui
 import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import org.junit.Assert.assertEquals
@@ -21,7 +22,7 @@ fun View.assertBackground(@DrawableRes expected: Int) {
     assertEquals(expected, shadowOf(this.background).createdFromResId)
 }
 
-fun ImageButton.assertDrawableResource(@DrawableRes expected: Int) {
+fun ImageView.assertDrawableResource(@DrawableRes expected: Int) {
     assertEquals(expected, shadowOf(this.drawable).createdFromResId)
 }
 
