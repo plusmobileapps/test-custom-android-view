@@ -5,10 +5,7 @@ import android.os.Build
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import io.mockk.MockKAnnotations
 import io.mockk.every
-import io.mockk.impl.annotations.MockK
-import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.Assert.assertEquals
@@ -16,13 +13,11 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [Build.VERSION_CODES.O_MR1])
 class MyCustomViewTest {
-
 
     private lateinit var myCustomView: MyCustomView
     private lateinit var rootView: ConstraintLayout
@@ -37,11 +32,10 @@ class MyCustomViewTest {
     private fun setUp(isLocked: Boolean) {
         val activityController = Robolectric.buildActivity(Activity::class.java)
         val activity = activityController.get()
-        val attributeSet = with(Robolectric.buildAttributeSet()) {
+        val attributeSet = buildAttributeSet {
             addAttribute(R.attr.unlockLabel, expectedUnlockText)
             addAttribute(R.attr.lockLabel, expectedLockText)
             addAttribute(R.attr.isLocked, isLocked.toString())
-            build()
         }
         every { lockedListener(any()) } returns Unit
         myCustomView = MyCustomView(activity, attributeSet)
